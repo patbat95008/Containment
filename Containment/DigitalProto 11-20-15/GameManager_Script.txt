@@ -1,0 +1,41 @@
+var i, j;
+globalvar cityX, cityY;
+globalvar inX, inY;
+
+//Draw city
+index = 0;
+for(i = 0; i < 3; i += 1){
+    for(j = 0; j < 4; j +=1){
+        //Only draw city if in its room
+        if(room_get_name(room) == "Map"){
+            draw_sprite(citySprite[index], 0, GameManager.x + (600 * i),
+                         GameManager.y + (300 * j));        
+            cityX[index] = GameManager.x + (530 * i);
+            cityY[index] = GameManager.y + (209 * j);
+            
+        }
+        index += 1;
+    }
+}
+
+index = 0;
+//Test to see if user has clicked in zone
+
+for(i = 0; i < 3; i += 1){
+    for(j = 0; j < 4; j +=1){
+        if((mouse_x >= cityX[index] && mouse_x <= cityX[index] + 530) 
+        && (mouse_y >= cityY[index] && mouse_y <= cityY[index] + 209)
+        && mouse_check_button(mb_left)
+        && room == Map){
+            inX = i;
+            inY = j;
+            room_goto_next();
+        }/*else if(room == Interview && mouse_check_button(mb_right)){
+            room_goto_previous();
+        }*/
+        
+        index += 1;
+    }
+} 
+
+   
